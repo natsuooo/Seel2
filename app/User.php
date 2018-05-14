@@ -18,6 +18,8 @@ class User extends Authenticatable
   protected $fillable = [
       'name', 'email', 'password',
   ];
+	
+	protected $guarded=['id', 'created_at'];
 
   /**
    * The attributes that should be hidden for arrays.
@@ -32,4 +34,9 @@ class User extends Authenticatable
   public function sendPasswordResetNotification($token){
     $this->notify(new PasswordReset($token));
   }
+	
+//	ユーザーと画像を紐づける
+	public function account_images(){
+		return $this->hasMany('App\AccountImage');
+	}
 }

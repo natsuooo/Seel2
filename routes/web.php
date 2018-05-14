@@ -16,11 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//認証
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
-Route::get('/photos', function(){
-  $image=Image::make(file_get_contents('http://goo.gl/uDTEzv'));
-  return $image->response('jpg');
-});
+//画像アップロード
+Route::post('/accountImageStore', 'HomeController@accountImageStore');
