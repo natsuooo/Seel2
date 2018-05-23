@@ -20,24 +20,24 @@
                 
                 <div class="card-body">
                 <h5>プロフィール</h5>
-                <p><a href="{{ url('/profile') }}">プロフィールを編集する</a></p>
+                <p><a href="{{ url('/host/profile') }}">プロフィール</a></p>
                 @foreach($profiles as $profile)
-									<h6>ヘッダー画像</h6>
-									<img src="../{{$profile->header_image}}">
-									<p></p>
-									<h6>プロフィール画像</h6>
-									<img src="../{{$profile->profile_image}}">
-									<p></p>
-									<h6>ユーザーネーム</h6>
-									<p>{{ $profile->user_name }}</p>
-             			<h6>フェイスブック</h6>
-									<p>{{ $profile->facebook }}</p>
-             			<h6>インスタグラム</h6>
-									<p>{{ $profile->instagram }}</p>
-              		<h6>ツイッター</h6>
-									<p>{{ $profile->twitter }}</p>
-             			<h6>自己紹介</h6>
-									<p>{{ $profile->text }}</p>
+                <h6>ヘッダー画像</h6>
+                <img src="../{{$profile->header_image}}">
+                <p></p>
+                <h6>プロフィール画像</h6>
+                <img src="../{{$profile->profile_image}}">
+                <p></p>
+                <h6>ユーザーネーム</h6>
+                <p>{{ $profile->user_name }}</p>
+                <h6>フェイスブック</h6>
+                <p>{{ $profile->facebook }}</p>
+                <h6>インスタグラム</h6>
+                <p>{{ $profile->instagram }}</p>
+                <h6>ツイッター</h6>
+                <p>{{ $profile->twitter }}</p>
+                <h6>自己紹介</h6>
+                <p>{{ $profile->text }}</p>
               	
                	@endforeach		
                 </div>

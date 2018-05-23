@@ -98,9 +98,6 @@ class HomeController extends Controller
 		return redirect('/home')->with('status', 'ファイルをアップロードしました！');
 	}
 	
-	public function vue(){
-		
-	}
 	
 	
 }

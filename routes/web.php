@@ -24,28 +24,33 @@ Route::get('/home', 'HomeController@index');
 
 
 //ホストルーティング
+
+//メインメニュー
 Route::get('/host/home', 'HomeController@index');
 Route::get('/host/menu', 'MenuController@index');
 Route::get('/host/menu/create', 'MenuController@create');
+Route::get('/host/calendar', 'CalendarController@index');
+Route::get('/host/data', 'DataController@index');
+Route::get('/host/review', 'ReviewController@index');
+Route::get('/host/notification', 'NotificationController@index');
+Route::get('/host/message', 'MessageController@index');
 
 
-//画像アップロード
-Route::post('/accountImageStore', 'HomeController@accountImageStore');
-Route::post('/menuUpload', 'HomeController@menuUpload');
+//サブメニュー
+Route::get('/host/profile', 'ProfileController@index');
 
-//プロフィール編集
-Route::post('/headerUpload', 'ProfileController@headerUpload');
-Route::post('/profileImageUpload', 'ProfileController@profileImageUpload');
-Route::post('/profileUpload', 'ProfileController@profileUpload');
+Route::get('/host/area', 'AreaController@index');
+Route::get('/host/cancel', 'CancelController@index');
+Route::get('/host/help', 'HelpController@index');
+
+//プロフィール
+Route::post('/host/profile/upload', 'ProfileController@upload');
 
 
-//プロフィール編集
-Route::get('/profile', 'ProfileController@index');
 
 //メニュー編集
 Route::get('/menu/create', 'MenuController@create');
 Route::post('/menu/create', 'MenuController@store');
 Route::post('/menu/create/image', 'MenuController@imageCreate');
 
-//Vue練習
-Route::get('/vue', 'HomeController@vue');
+

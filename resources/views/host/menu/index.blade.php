@@ -8,7 +8,7 @@
           
            
             <div class="card">
-                <div class="card-header">{{ $user->name }}さんのダッシュボード</div>
+                <div class="card-header">{{ $user->name }}さんのメニュー一覧</div>
 							
                 @if (session('status'))
 									<div class="alert alert-success">
