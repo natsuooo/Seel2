@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Host;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class ProfileController extends Controller
 		return view('/host/profile', compact('user', 'profile'));
 	}
 	
-  
+    //ファイルサイズが大きすぎるとローカル環境だとうまくいかない、本番環境でもやってみてどの程度許すか後で決める
 	public function upload(Request $request){
       $user=Auth::user();
       $user_id=$user->id;
@@ -33,30 +34,36 @@ class ProfileController extends Controller
       if(isset($request->header_image)){
         
         
-        $header_image=Image::make($request['header_image']->getRealPath());
+        $header_image=Image::make($request->file('header_image')->getRealPath());
         $header_image->resize(100, null, function($constraint){
             $constraint->aspectRatio();
         });
-        $header_extension=$request['header_image']->getClientOriginalExtension();
+        $header_extension=$request->file('header_image')->getClientOriginalExtension();
         $header_image->save(public_path().'/images/header/'.$user_id.'.'.$header_extension);
         $header_path='images/header/'.$user_id.'.'.$header_extension;
         
-        unlink($profile->header_image);
+        if(isset($profile->header_image)){
+          unlink($profile->header_image);
+        }
+        
 
       }else{
           $header_path=$profile->header_image;
       }			
 
       if(isset($request->profile_image)){
-        $profile_image=Image::make($request['profile_image']->getRealPath());
+        $profile_image=Image::make($request->file('profile_image')->getRealPath());
         $profile_image->resize(100, null, function($constraint){
         $constraint->aspectRatio();
         });
-        $profile_extension=$request['profile_image']->getClientOriginalExtension();
+        $profile_extension=$request->file('profile_image')->getClientOriginalExtension();
         $profile_image->save(public_path().'/images/profile/'.$user_id.'.'.$profile_extension);
         $profile_path='images/profile/'.$user_id.'.'.$profile_extension;
         
-        unlink($profile->$profile_image);
+        if(isset($profile->$profile_image)){
+          unlink($profile->$profile_image);
+        }
+        
 
       }else{
           $profile_path=$profile->profile_image;

@@ -35,8 +35,7 @@ class User extends Authenticatable
     $this->notify(new PasswordReset($token));
   }
 	
-//	ユーザーと画像を紐づける
-	public function account_images(){
-		return $this->hasMany('App\AccountImage');
-	}
+  public function profile(){
+    return $this->hasOne('App\Profile');
+  }
 }

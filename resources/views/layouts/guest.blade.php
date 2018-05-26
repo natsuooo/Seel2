@@ -27,13 +27,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Seel
                 </a>
-                <a href="{{ url('/host/home') }}">ホーム</a> | 
-                <a href="{{ url('/host/menu') }}">メニュー</a> | 
-                <a href="{{ url('/host/calendar') }}">カレンダー</a> | 
-                <a href="{{ url('/host/data') }}">データ</a> | 
-                <a href="{{ url('/host/review') }}">レビュー</a> | 
-                <a href="{{ url('/host/notification') }}">通知</a> | 
-                <a href="{{ url('/host/message') }}">メッセージ</a>
+                <a href="{{ url('/host/home') }}">ホスト</a> | 
+                <a href="{{ url('/guest/favorite') }}">お気に入り</a> | 
+                <a href="{{ url('/guest/notification') }}">通知</a> | 
+                <a href="{{ url('/guest/message') }}">メッセージ</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -61,15 +58,7 @@
                                         {{ __('プロフィール') }}
                                     </a>
                                     
-                                    <a class="dropdown-item" href="{{ url('/host/area') }}">
-                                        {{ __('エリア設定') }}
-                                    </a>
-                                    
-                                    <a class="dropdown-item" href="{{ url('/host/cancel') }}">
-                                        {{ __('キャンセルポリシー') }}
-                                    </a>
-                                    
-                                    <a class="dropdown-item" href="{{ url('/host/help') }}">
+                                    <a class="dropdown-item" href="{{ url('/guest/help') }}">
                                         {{ __('ヘルプ') }}
                                     </a>
                                     

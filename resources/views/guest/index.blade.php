@@ -69,27 +69,35 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">ホーム</a>
+                        <a href="{{ url('/') }}">Seel</a>
+                        <a href="{{ url('/host/home') }}">ホスト</a>
                     @else
                         <a href="{{ route('login') }}">ログイン</a>
                         <a href="{{ route('register') }}">新規登録</a>
                     @endauth
                 </div>
             @endif
-
+            
             <div class="content">
-                <div class="title m-b-md">
-                    Seel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+							<div class="title m-b-md">Seel</div>
+						</div>
         </div>
+        
+        <div class="content">
+          <h1>メニュー一覧</h1>
+            @foreach($menus as $menu)
+            <div class="card-body" style="border-bottom:1px solid black;">
+              <div class="panel panel-default">
+                <img src="{{$menu->image}}" style="width:100px;">
+                <a href=""></a>
+                <p>タイトル：{{ $menu->title }}</p>
+                <p>説明：{{ $menu->body }}</p>
+                <p>価格：{{ $menu->price }}</p>
+                <p><a href="{{ url('/guest/table', $menu->profile) }}">{{ $menu->profile->user_name }}</a></p>
+                <a href="{{ url('/guest/table', $menu->profile) }}"><img src="{{$menu->profile->profile_image}}" style="width:100px;"></a>
+              </div>
+            </div>
+            @endforeach
+          </div>
     </body>
 </html>

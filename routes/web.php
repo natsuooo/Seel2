@@ -11,46 +11,41 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('index');
-});
-
+//ゲストルーティング
+Route::get('/', 'Guest\IndexController@index');
+Route::get('/guest/table/{profile}', 'Guest\TableController@show');
+Route::get('/guest/message/{profile}', 'MessageController@index');
 
 
 //認証
 Auth::routes();
-Route::get('/home', 'HomeController@index');
-
 
 //ホストルーティング
 
+
 //メインメニュー
-Route::get('/host/home', 'HomeController@index');
-Route::get('/host/menu', 'MenuController@index');
-Route::get('/host/menu/create', 'MenuController@create');
-Route::get('/host/calendar', 'CalendarController@index');
-Route::get('/host/data', 'DataController@index');
-Route::get('/host/review', 'ReviewController@index');
-Route::get('/host/notification', 'NotificationController@index');
-Route::get('/host/message', 'MessageController@index');
+Route::get('/host/home', 'Host\HomeController@index');
+Route::get('/host/menu', 'Host\MenuController@index');
+Route::get('/host/menu/create', 'Host\MenuController@create');
+Route::get('/host/calendar', 'Host\CalendarController@index');
+Route::get('/host/data', 'Host\DataController@index');
+Route::get('/host/review', 'Host\ReviewController@index');
+Route::get('/host/notification', 'Host\NotificationController@index');
+Route::get('/host/message', 'Host\MessageController@index');
 
 
 //サブメニュー
-Route::get('/host/profile', 'ProfileController@index');
+Route::get('/host/profile/{profile}', 'Host\ProfileController@index');
 
-Route::get('/host/area', 'AreaController@index');
-Route::get('/host/cancel', 'CancelController@index');
-Route::get('/host/help', 'HelpController@index');
+Route::get('/host/area', 'Host\AreaController@index');
+Route::get('/host/cancel', 'Host\CancelController@index');
+Route::get('/host/help', 'Host\HelpController@index');
 
 //プロフィール
-Route::post('/host/profile/upload', 'ProfileController@upload');
+Route::post('/host/profile', 'Host\ProfileController@upload');
 
-
-
-//メニュー編集
-Route::get('/menu/create', 'MenuController@create');
-Route::post('/menu/create', 'MenuController@store');
-Route::post('/menu/create/image', 'MenuController@imageCreate');
-
-
+//メニュー
+Route::post('/host/menu/create', 'Host\MenuController@store');
+Route::get('/host/menu/{menu}/edit', 'Host\MenuController@edit');
+Route::patch('/host/menu/{menu}', 'Host\MenuController@update');
+Route::delete('/host/menu/{menu}', 'Host\MenuController@destroy');
