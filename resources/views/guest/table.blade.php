@@ -9,13 +9,14 @@
           
           @if (session('status'))
             <div class="alert alert-success">
-              {{ session('status') }}
+              {!! session('status') !!}
             </div>
           @endif
 
          
           <div class="card-body">
             <h2>プロフィール</h2>
+            
             <div class="panel panel-default">
               <p>{{ $profile->user_name }}</p>
               <p><img src="../../{{$profile->header_image}}" style="width:100px;"></p>
@@ -55,12 +56,7 @@
           @endforeach
           
           <div class="card-body">
-            <h2>カレンダー</h2>
-            
-          </div>
-          
-          <div class="card-body">
-            <p><a href="{{url('/reserve', $profile)}}">予約する</a></p>
+            <p>{{$profile->user_name}}さんは大体平日・休日の19:00以降にホストすることができます。</p>
           </div>
           
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">予約リクエスト</button>
@@ -74,8 +70,10 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                
+                {{ Form::open(['url' => ['/reserve', $profile], 'method'=>'post']) }}
                 <div class="modal-body">
-                  {{ Form::open(['url' => ['/reserve', $profile], 'method'=>'post']) }}
+                  
                     <div class="form-group">
                       {{Form::label('number', 'ゲストの人数', ['class'=>'col-form-label'])}}
                       {{Form::select('number',['1', '2', '3', '4', '5'], null, ['class'=>'form-control'])}}
@@ -92,20 +90,21 @@
                     
                     <div class="form-group">
                       {{Form::label('calendar', '予定日時をカレンダーから選択して下さい。', ['class'=>'col-form-label'])}}
-                      <input type="text" id="calendar">
+                      <input type="text" id="calendar" name="calendar">
                     </div>
-                    
                    
                     <div class="form-group">
                       {{Form::label('message', 'メッセージ', ['class'=>'col-form-label'])}}
                       {{Form::textarea('message', null, ['placeholder'=>'楽しみにしています。よろしくお願いします。', 'class'=>'form-control'])}}
                     </div>
-                  {{Form::close()}}
+                    
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                  <button type="button" class="btn btn-primary">予約リクエスト</button>
+                  <button type="submit" class="btn btn-primary">予約リクエスト</button>
+                  
                 </div>
+                {{Form::close()}}
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ class CreateReservesTable extends Migration
           $table->unsignedInteger('reserve_profile_id');
           $table->unsignedInteger('reserved_profile_id');
           $table->unsignedInteger('number');
-          $table->unsignedInteger('reserved_menu');
+          $table->text('reserved_menu');
           $table->text('calendar');
           $table->text('message');
           $table->timestamps();
