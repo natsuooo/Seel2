@@ -66,3 +66,24 @@ const app=new Vue({
     },
   },  
 })
+
+
+$(function () {
+  
+  $('[data-toggle="tooltip"]').tooltip();
+  
+  $('[data-toggle="popover"]').popover();
+  
+  
+  //なぜか時間が選択したら消えてしまう。とりあえず放置。
+  flatpickr('#calendar', {
+    minDate: "today",
+    enableTime: true,
+    dateFormat: "Y年m月d日 H時i分",
+    locale: 'ja',
+    inline: true,
+    altInput: true,
+    altFormat: "Y年m月d日 H時i分",
+  });
+  
+});

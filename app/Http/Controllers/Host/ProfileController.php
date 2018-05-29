@@ -14,23 +14,25 @@ class ProfileController extends Controller
 	
 	public function __construct()
 	{
-			$this->middleware('auth');
+      $this->middleware('auth');
 	}
 	
 	public function index(){
-		$user=Auth::user();
-		$profile=Profile::where('user_id', $user->id)->first();
-		
-		return view('/host/profile', compact('user', 'profile'));
+      $user=Auth::user();
+      $profile=Profile::where('user_id', $user->id)->first();
+
+      return view('/host/profile', compact('user', 'profile'));
 	}
 	
     //ファイルサイズが大きすぎるとローカル環境だとうまくいかない、本番環境でもやってみてどの程度許すか後で決める
-	public function upload(Request $request){
-      $user=Auth::user();
-      $user_id=$user->id;
-      $profile=Profile::where('user_id', $user->id)->first();
-
-
+	public function upload(Request $request, Profile $profile){
+//      $user=Auth::user();
+//      $user_id=$user->id;
+      
+//      $profile=Profile::where('user_id', $user->id)->first();
+      
+      $profile_id=$profile->id;
+      
       if(isset($request->header_image)){
         
         
@@ -39,8 +41,8 @@ class ProfileController extends Controller
             $constraint->aspectRatio();
         });
         $header_extension=$request->file('header_image')->getClientOriginalExtension();
-        $header_image->save(public_path().'/images/header/'.$user_id.'.'.$header_extension);
-        $header_path='images/header/'.$user_id.'.'.$header_extension;
+        $header_image->save(public_path().'/images/header/'.$profile_id.'.'.$header_extension);
+        $header_path='images/header/'.$profile_id.'.'.$header_extension;
         
         if(isset($profile->header_image)){
           unlink($profile->header_image);
@@ -57,8 +59,8 @@ class ProfileController extends Controller
         $constraint->aspectRatio();
         });
         $profile_extension=$request->file('profile_image')->getClientOriginalExtension();
-        $profile_image->save(public_path().'/images/profile/'.$user_id.'.'.$profile_extension);
-        $profile_path='images/profile/'.$user_id.'.'.$profile_extension;
+        $profile_image->save(public_path().'/images/profile/'.$profile_id.'.'.$profile_extension);
+        $profile_path='images/profile/'.$profile_id.'.'.$profile_extension;
         
         if(isset($profile->$profile_image)){
           unlink($profile->$profile_image);
@@ -70,7 +72,7 @@ class ProfileController extends Controller
       }
 
       Profile::updateOrCreate(
-          ['user_id'=>$user_id],
+          ['id'=>$profile_id],
           ['user_name'=>$request->user_name,
           'header_image'=>$header_path,
           'profile_image'=>$profile_path,
@@ -81,7 +83,7 @@ class ProfileController extends Controller
       );
 
 
-      return redirect('/host/profile')->with('status', 'プロフィールを更新しました');
+      return redirect('/profile')->with('status', 'プロフィールを更新しました');
   }
 	
  

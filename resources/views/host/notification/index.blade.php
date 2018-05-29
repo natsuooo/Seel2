@@ -8,17 +8,17 @@
           
            
             <div class="card">
-                <div class="card-header">{{ $user->name }}さんのメッセージ</div>
+                <div class="card-header">{{ $user->profile->user_name }}さんの通知</div>
 							
                 @if (session('status'))
-									<div class="alert alert-success">
-											{{ session('status') }}
-									</div>
-								@endif
+                  <div class="alert alert-success">
+                    {{ session('status') }}
+                  </div>
+                @endif
                
                 <div class="card-body">
                 <h5></h5>
-                <p>申し込みしてきたゲストとメッセージのやり取りをするよ、翻訳とか地図を出すとかそういうのするよねきっと</p>
+                <p></p>
                 </div>
                 
                

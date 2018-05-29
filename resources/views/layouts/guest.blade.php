@@ -19,6 +19,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+    
 </head>
 <body>
     <div id="app">
@@ -27,10 +33,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Seel
                 </a>
-                <a href="{{ url('/host/home') }}">ホスト</a> | 
-                <a href="{{ url('/guest/favorite') }}">お気に入り</a> | 
-                <a href="{{ url('/guest/notification') }}">通知</a> | 
-                <a href="{{ url('/guest/message') }}">メッセージ</a>
+                <a href="{{ url('/home') }}">ホスト</a> | 
+                <a href="{{ url('/favorite') }}">お気に入り</a> | 
+                <a href="{{ url('/notification') }}">通知</a> | 
+                <a href="{{ url('/message/receive') }}">メッセージ</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,11 +56,11 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->profile->user_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/host/profile', $profile) }}">
+                                    <a class="dropdown-item" href="{{ url('/guest-profile') }}">
                                         {{ __('プロフィール') }}
                                     </a>
                                     

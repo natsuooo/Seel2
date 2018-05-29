@@ -17,4 +17,12 @@ class Profile extends Model
   public function menus(){
     return $this->hasMany('App\Menu');
   }
+  
+  public function messages(){
+    return $this->hasMany('App\Message');
+  }
+  
+  public function favorites(){
+    return $this->belongsToMany('App\Favorite')->withTimestamps();
+  }
 }

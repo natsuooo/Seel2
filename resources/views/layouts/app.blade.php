@@ -27,13 +27,13 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Seel
                 </a>
-                <a href="{{ url('/host/home') }}">ホーム</a> | 
-                <a href="{{ url('/host/menu') }}">メニュー</a> | 
-                <a href="{{ url('/host/calendar') }}">カレンダー</a> | 
-                <a href="{{ url('/host/data') }}">データ</a> | 
-                <a href="{{ url('/host/review') }}">レビュー</a> | 
-                <a href="{{ url('/host/notification') }}">通知</a> | 
-                <a href="{{ url('/host/message') }}">メッセージ</a>
+                <a href="{{ url('/home') }}">ホーム</a> | 
+                <a href="{{ url('/menu') }}">メニュー</a> | 
+                <a href="{{ url('/calendar') }}">カレンダー</a> | 
+                <a href="{{ url('/data') }}">データ</a> | 
+                <a href="{{ url('/review') }}">レビュー</a> | 
+                <a href="{{ url('/notification') }}">通知</a> | 
+                <a href="{{ url('/message/receive') }}">メッセージ</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,23 +53,23 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->profile->user_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/host/profile', $profile) }}">
+                                    <a class="dropdown-item" href="{{ url('/profile') }}">
                                         {{ __('プロフィール') }}
                                     </a>
                                     
-                                    <a class="dropdown-item" href="{{ url('/host/area') }}">
+                                    <a class="dropdown-item" href="{{ url('/area') }}">
                                         {{ __('エリア設定') }}
                                     </a>
                                     
-                                    <a class="dropdown-item" href="{{ url('/host/cancel') }}">
+                                    <a class="dropdown-item" href="{{ url('/cancel') }}">
                                         {{ __('キャンセルポリシー') }}
                                     </a>
                                     
-                                    <a class="dropdown-item" href="{{ url('/host/help') }}">
+                                    <a class="dropdown-item" href="{{ url('/help') }}">
                                         {{ __('ヘルプ') }}
                                     </a>
                                     

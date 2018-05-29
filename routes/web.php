@@ -13,39 +13,62 @@
 
 //ゲストルーティング
 Route::get('/', 'Guest\IndexController@index');
-Route::get('/guest/table/{profile}', 'Guest\TableController@show');
-Route::get('/guest/message/{profile}', 'MessageController@index');
+Route::get('/table/{profile}', 'Guest\TableController@show');
+Route::get('/favorite', 'Guest\FavoriteController@index');
+Route::get('/notification', 'NotificationController@index');
+Route::get('/message', 'MessageController@index');
 
+
+//メッセージ機能
+Route::get('/message/contact/{profile}', 'MessageController@contact');
+Route::post('/message/submit', 'MessageController@submit');
+Route::get('/message/private/{profile}', 'MessageController@private');
+Route::get('/message/receive', 'MessageController@receive');
+Route::get('/message/send', 'MessageController@send');
+
+
+//お気に入り機能
+Route::post('/favorite/register', 'Guest\FavoriteController@registerOrDelete');
+Route::post('/favorite/delete', 'Guest\FavoriteController@delete');
+
+//予約
+Route::post('/reserve/{profile}', 'Guest\ReserveController@reserve');
 
 //認証
 Auth::routes();
+
+
+
 
 //ホストルーティング
 
 
 //メインメニュー
-Route::get('/host/home', 'Host\HomeController@index');
-Route::get('/host/menu', 'Host\MenuController@index');
-Route::get('/host/menu/create', 'Host\MenuController@create');
-Route::get('/host/calendar', 'Host\CalendarController@index');
-Route::get('/host/data', 'Host\DataController@index');
-Route::get('/host/review', 'Host\ReviewController@index');
-Route::get('/host/notification', 'Host\NotificationController@index');
-Route::get('/host/message', 'Host\MessageController@index');
+Route::get('/home', 'Host\HomeController@index');
+Route::get('/menu', 'Host\MenuController@index');
+Route::get('/calendar', 'Host\CalendarController@index');
+Route::get('/data', 'Host\DataController@index');
+Route::get('/review', 'Host\ReviewController@index');
+Route::get('/notification', 'Host\NotificationController@index');
+//Route::get('/message', 'Host\MessageController@index');
 
 
 //サブメニュー
-Route::get('/host/profile/{profile}', 'Host\ProfileController@index');
+Route::get('/profile', 'Host\ProfileController@index');
 
-Route::get('/host/area', 'Host\AreaController@index');
-Route::get('/host/cancel', 'Host\CancelController@index');
-Route::get('/host/help', 'Host\HelpController@index');
+Route::get('/area', 'Host\AreaController@index');
+Route::get('/cancel', 'Host\CancelController@index');
+Route::get('/help', 'Host\HelpController@index');
 
 //プロフィール
-Route::post('/host/profile', 'Host\ProfileController@upload');
+Route::post('/profile/{profile}', 'Host\ProfileController@upload');
 
 //メニュー
-Route::post('/host/menu/create', 'Host\MenuController@store');
-Route::get('/host/menu/{menu}/edit', 'Host\MenuController@edit');
-Route::patch('/host/menu/{menu}', 'Host\MenuController@update');
-Route::delete('/host/menu/{menu}', 'Host\MenuController@destroy');
+Route::get('/menu/create', 'Host\MenuController@create');
+Route::post('/menu/create/{profile}', 'Host\MenuController@store');
+Route::get('/menu/{menu}/edit', 'Host\MenuController@edit');
+Route::patch('/menu/{menu}', 'Host\MenuController@update');
+Route::delete('/menu/{menu}', 'Host\MenuController@destroy');
+
+//カレンダー
+Route::get('/calendar/{t}', 'Host\CalendarController@show');

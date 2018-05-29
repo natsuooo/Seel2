@@ -11,15 +11,15 @@
                 <div class="card-header">{{ $user->name }}さんのメニュー一覧</div>
 							
                 @if (session('status'))
-									<div class="alert alert-success">
-											{{ session('status') }}
-									</div>
-								@endif
+                  <div class="alert alert-success">
+                    {{ session('status') }}
+                  </div>
+                @endif
                
                <div class="card-body">
                   <h5 class="card-title">メニュー</h5>
                 	
-                  <h6><a href="{{ url('/host/menu/create') }}">メニューを追加する</a></h6>
+                  <h6><a href="{{ url('/menu/create') }}">メニューを追加する</a></h6>
                 		
                     @forelse($menus as $menu)
                     <div class="panel panel-default">
@@ -27,12 +27,12 @@
                       <p>タイトル：{{ $menu->title }}</p>
                       <p>説明：{{ $menu->body }}</p>
                       <p>価格：{{ $menu->price }}</p>
-                      <p><a href="{{ action('MenuController@edit', $menu) }}">編集する</a></p>
+                      <p><a href="{{ action('Host\MenuController@edit', $menu) }}">編集する</a></p>
                       <a href="#" class="btn btn-danger btn-sm" data-id="{{ $menu->id }}" onclick="deleteMenu(this);">削除</a>
-											<form method="post" action="{{ url('/host/menu', $menu->id) }}" id="form_{{ $menu->id }}">
-												{{ csrf_field() }}
-												{{ method_field('delete') }}
-											</form>
+                      <form method="post" action="{{ url('/host/menu', $menu->id) }}" id="form_{{ $menu->id }}">
+                          {{ csrf_field() }}
+                          {{ method_field('delete') }}
+                      </form>
                     </div>
                     @empty
                     <p>No menu yet</p>

@@ -5,62 +5,61 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
            
-           <p>
-           	<a href="{{ url('/home') }}">ホーム</a> /
-           </p>
-           
-
-                
-                <div class="card">
-
-                  <div class="card-header">{{ $user->name }}さんのメニューを追加する</div>
-
-                  @if (session('status'))
-                    <div class="alert alert-success">
-                      {{ session('status') }}
-                    </div>
-                  @endif
+         <p>
+          <a href="{{ url('/home') }}">ホーム</a> /
+         </p>
 
 
-                  {!! Form::open(['url' => '/host/menu/create', 'method'=>'post', 'files' => true]) !!}
-                  {!! Form::token() !!}
+
+              <div class="card">
+
+                <div class="card-header">{{ $user->profile->user_name }}さんのメニューを追加する</div>
+
+                @if (session('status'))
+                  <div class="alert alert-success">
+                    {{ session('status') }}
+                  </div>
+                @endif
 
 
-                  <h6>料理画像</h6>
-                  <p>
-                    {!! Form::file('image', ['v-on:change'=>'onFileHeaderChange', 'accept'=>'.jpg,.JPG,.jpeg,.JPEG,.png,.PNG,.gif,.GIF', 'enctype'=>'multipart/form-data']) !!}
-                  </p>
-                  
-
-                  <p>
-                    <img v-show="uploadedHeaderImage" :src="uploadedHeaderImage" style="width:100px;">
-                  </p>
+                {!! Form::open(['url' => ['/menu/create', $user->profile], 'method'=>'post', 'files' => true]) !!}
+                {!! Form::token() !!}
 
 
-                  <h6>タイトル</h6>
-                  <p>
-                    {!! Form::text('title', !empty(old('title'))?old('title'):'') !!}
-                  </p>
-
-                  <h6>説明</h6>
-                  <p>
-                    {!! Form::textarea('body', !empty($profile->body)?$profile->text:old('body') )!!}
-                  </p>
-                  
-                  <h6>価格</h6>
-                  <p>
-                    {!! Form::text('price', !empty(old('price'))?old('price'):'') !!}
-                  </p>
+                <h6>料理画像</h6>
+                <p>
+                  {!! Form::file('image', ['v-on:change'=>'onFileHeaderChange', 'accept'=>'.jpg,.JPG,.jpeg,.JPEG,.png,.PNG,.gif,.GIF', 'enctype'=>'multipart/form-data']) !!}
+                </p>
 
 
-                  {!! Form::submit('メニューを追加する') !!}
-                  {!! Form::close() !!}
+                <p>
+                  <img v-show="uploadedHeaderImage" :src="uploadedHeaderImage" style="width:100px;">
+                </p>
 
-                </div>
-               
-            </div>
-        </div>
-    </div>
-</div>
+
+                <h6>タイトル</h6>
+                <p>
+                  {!! Form::text('title', !empty(old('title'))?old('title'):'') !!}
+                </p>
+
+                <h6>説明</h6>
+                <p>
+                  {!! Form::textarea('body', !empty($profile->body)?$profile->text:old('body') )!!}
+                </p>
+
+                <h6>価格</h6>
+                <p>
+                  {!! Form::text('price', !empty(old('price'))?old('price'):'') !!}
+                </p>
+
+
+                {!! Form::submit('メニューを追加する') !!}
+                {!! Form::close() !!}
+
+              </div>
+
+          </div>
+      </div>
+  </div>
 @endsection
 

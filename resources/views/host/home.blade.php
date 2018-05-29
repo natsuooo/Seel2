@@ -8,7 +8,7 @@
           
            
             <div class="card">
-                <div class="card-header">{{ $user->name }}さんのダッシュボード</div>
+                <div class="card-header">{{ $profile->user_name }}さんのダッシュボード</div>
 							
                 @if (session('status'))
                   <div class="alert alert-success">
@@ -20,7 +20,7 @@
                 
                 <div class="card-body">
                 <h5>プロフィール</h5>
-                <p><a href="{{ url('/host/profile', $profile) }}">プロフィール</a></p>
+                <p><a href="{{ url('/profile') }}">プロフィール</a></p>
                 <h6>ヘッダー画像</h6>
                 <img src="../{{!empty($profile->header_image)?$profile->header_image:'images/image.png'}}" style="width:100px;">
                 <p></p>
@@ -46,7 +46,7 @@
                 <div class="card-body">
                   <h5 class="card-title">メニュー</h5>
                 	
-                  <h6><a href="{{ url('/host/menu/create') }}">メニューを追加する</a></h6>
+                  <h6><a href="{{ url('/menu/create') }}">メニューを追加する</a></h6>
                 		
                     @forelse($menus as $menu)
                     <div class="panel panel-default">
@@ -56,7 +56,7 @@
                       <p>価格：{{ $menu->price }}</p>
                       <p><a href="{{ action('Host\MenuController@edit', $menu) }}">編集する</a></p>
                       <a href="#" class="btn btn-danger btn-sm" data-id="{{ $menu->id }}" onclick="deleteMenu(this);">削除</a>
-                      <form method="post" action="{{ url('/host/menu', $menu->id) }}" id="form_{{ $menu->id }}">
+                      <form method="post" action="{{ url('/menu', $menu->id) }}" id="form_{{ $menu->id }}">
                           {{ csrf_field() }}
                           {{ method_field('delete') }}
                       </form>

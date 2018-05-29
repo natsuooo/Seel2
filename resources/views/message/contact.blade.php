@@ -8,14 +8,17 @@
           <div class="card-header">{{ $profile->user_name }}さんへメッセージを送る</div>
 
           <div class="card-body">
-            {!! Form::open(['url' => '/guest/message', 'method'=>'post', 'files' => true]) !!}
-            {!! Form::token() !!} 
+            {{ Form::open(['url' => '/message/submit', 'method'=>'post']) }}
            
-            {!! Form::textarea('message', !empty(old('message'))?old('message'):'') !!}
+            {{ Form::textarea('message', !empty(old('message'))?old('message'):'') }}
             
-            {!! Form::submit('メッセージを送る') !!}
-            {!! Form::close() !!}
+            {{ Form::hidden('from', Auth::user()->profile->id) }}
+            {{ Form::hidden('profile_id', $profile->id) }}
+            
+            {{ Form::submit('メッセージを送る') }}
+            {{ Form::close() }}
           </div>
+
           
           
       </div>

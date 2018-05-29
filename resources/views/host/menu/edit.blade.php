@@ -17,13 +17,13 @@
                 <div class="card-body">
                 <h5 class="card-title">メニュー</h5>
                 
-                {!! Form::open(['url' => ['/host/menu', $menu], 'method'=>'patch', 'files' => true]) !!}
-                {!! Form::token() !!}
+                {{Form::open(['url' => ['/menu', $menu], 'method'=>'patch', 'files' => true]) }}
+                {{ Form::token() }}
 
 
                 <h6>料理画像</h6>
                 <p>
-                  {!! Form::file('image', ['v-on:change'=>'onFileHeaderChange', 'accept'=>'.jpg,.JPG,.jpeg,.JPEG,.png,.PNG,.gif,.GIF', 'enctype'=>'multipart/form-data']) !!}
+                  {{ Form::file('image', ['v-on:change'=>'onFileHeaderChange', 'accept'=>'.jpg,.JPG,.jpeg,.JPEG,.png,.PNG,.gif,.GIF', 'enctype'=>'multipart/form-data']) }}
                 </p>
                 <p>
                   <img src="../../../{{$menu->image}}" v-if="header_old_show" style="width:100px;">
@@ -35,24 +35,24 @@
 
                 <h6>タイトル</h6>
                 <p>
-                  {!! Form::text('title', !empty(old('title'))?old('title'):$menu->title) !!}
+                  {{ Form::text('title', !empty(old('title'))?old('title'):$menu->title) }}
                 </p>
                 
                 <h6>説明</h6>
                 <p>
-                  {!! Form::textarea('body', !empty(old('body'))?old('body'):$menu->body )!!}
+                  {{ Form::textarea('body', !empty(old('body'))?old('body'):$menu->body ) }}
                 </p>
                 
                 <h6>価格</h6>
                 <p>
-                  {!! Form::text('price', !empty(old('price'))?old('price'):$menu->price) !!}
+                  {{ Form::text('price', !empty(old('price'))?old('price'):$menu->price) }}
                 </p>
                 
                 
 
 
-                {!! Form::submit('メニューを編集する') !!}
-                {!! Form::close() !!}
+                {{ Form::submit('メニューを編集する') }}
+                {{ Form::close() }}
                 
             </div>
         </div>

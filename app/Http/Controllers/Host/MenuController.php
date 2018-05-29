@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Menu;
+use App\Profile;
 
 class MenuController extends Controller
 {
@@ -17,9 +18,8 @@ class MenuController extends Controller
   
   //マイメニュー一覧を表示する
   public function index(){
-    $user=Auth::user();
-    //先にプロフィールテーブルを作らないと機能しないことに注意
-    $menus=Menu::latest('created_at')->where('profile_id', $user->id)->get();
+   $user=Auth::user();
+   $menus=Menu::latest('created_at')->where('profile_id', $user->id)->get();
 
     return view('/host/menu/menu', compact('user', 'menus'));
   }
@@ -31,10 +31,11 @@ class MenuController extends Controller
   }
 	
   //メニューを追加する
-  public function store(Request $request){
+  public function store(Request $request, Profile $profile){
 
-    $user=Auth::user();
-    $user_id=$user->id;
+//    $user=Auth::user();
+//    $user_id=$user->id;
+    $profile_id=$profile->id;
     $time=time();
 
     if(isset($request->image)){
@@ -44,28 +45,27 @@ class MenuController extends Controller
           $constraint->aspectRatio();
       });
       $image_extension=$request->file('image')->getClientOriginalExtension();
-      $image->save(public_path().'/images/menu/'.$user_id.$time.'.'.$image_extension);
-      $image_path='images/menu/'.$user_id.$time.'.'.$image_extension;
+      $image->save(public_path().'/images/menu/'.$profile_id.$time.'.'.$image_extension);
+      $image_path='images/menu/'.$profile_id.$time.'.'.$image_extension;
 
     }else{
       $image_path='images/image.png';
     }
     
-    $menu=new Menu();
-    $menu->profile_id=$user_id;
-    $menu->image=$image_path;
-    $menu->title=$request->title;
-    $menu->body=$request->body;
-    $menu->price=$request->price;
-    $menu->save();
+    $menu=new Menu([
+      'image'=>$image_path,
+      'title'=>$request->title,
+      'body'=>$request->body,
+      'price'=>$request->price
+    ]);
+    $profile->menus()->save($menu);
     
-    return redirect('/host/home')->with('status', 'メニューを追加しました');
+    return redirect('/home')->with('status', 'メニューを追加しました');
 
   }
 	
   public function edit(Menu $menu){
-    $user=Auth::user();
-    return view('/host/menu/edit', compact('user', 'menu'));
+    return view('/host/menu/edit', compact('menu'));
   }
   
   public function update(Request $request, Menu $menu){
@@ -92,13 +92,13 @@ class MenuController extends Controller
     $menu->body=$request->body;
     $menu->price=$request->price;
     $menu->save();
-    return redirect('/host/home')->with('status', 'メニューを変更しました');
+    return redirect('/home')->with('status', 'メニューを変更しました');
   }
   
   public function destroy(Menu $menu){
     $menu->delete();
 		unlink($menu->image);
-    return redirect('/host/home')->with('status', 'メニューを削除しました');
+    return redirect('/home')->with('status', 'メニューを削除しました');
   }
   
 }
