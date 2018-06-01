@@ -12,7 +12,8 @@
               {!! session('status') !!}
             </div>
           @endif
-
+					
+        	
          
           <div class="card-body">
             <h2>プロフィール</h2>
@@ -62,7 +63,7 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">予約リクエスト</button>
 
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">{{$profile->user_name}}さんの食卓を予約リクエスト</h5>
@@ -76,13 +77,13 @@
                   
                     <div class="form-group">
                       {{Form::label('number', 'ゲストの人数', ['class'=>'col-form-label'])}}
-                      {{Form::select('number',['1', '2', '3', '4', '5'], null, ['class'=>'form-control'])}}
+                      {{Form::number('number', 1, ['class'=>'form-control', 'min'=>'1'])}}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="menu">
                     <p>予約したいメニューを選択して下さい。</p>
                       @foreach($menus as $menu)
                       <div class="form-check">
-                        {{Form::checkbox('reserved_menu[]', $menu->id)}}
+                        {{Form::checkbox('reserved_menu[]', $menu->id), []}}
                         {{$menu->title}} （{{$menu->price}}円）
                       </div>
                       @endforeach
@@ -90,7 +91,7 @@
                     
                     <div class="form-group">
                       {{Form::label('calendar', '予定日時をカレンダーから選択して下さい。', ['class'=>'col-form-label'])}}
-                      <input type="text" id="calendar" name="calendar">
+                      {{Form::text('calendar', null, ['id'=>'calendar'])}}
                     </div>
                    
                     <div class="form-group">
@@ -101,7 +102,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                  <button type="submit" class="btn btn-primary">予約リクエスト</button>
+                  <button type="submit" class="btn btn-primary">確認する</button>
                   
                 </div>
                 {{Form::close()}}

@@ -17,6 +17,7 @@ Route::get('/table/{profile}', 'Guest\TableController@show');
 Route::get('/favorite', 'Guest\FavoriteController@index');
 Route::get('/notification', 'NotificationController@index');
 Route::get('/message', 'MessageController@index');
+Route::get('/reserve', 'Guest\ReserveController@index');
 
 
 //メッセージ機能
@@ -37,7 +38,10 @@ Route::post('/reserve/{profile}', 'Guest\ReserveController@reserve');
 //認証
 Auth::routes();
 
-
+//SPA
+Route::get('/article', function(){
+  return view('vue');
+});
 
 
 //ホストルーティング

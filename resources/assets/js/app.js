@@ -1,4 +1,5 @@
-
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,6 +7,8 @@
  */
 
 require('./bootstrap');
+
+Vue.use(VueRouter);
 
 window.Vue = require('vue');
 
@@ -65,8 +68,45 @@ const app=new Vue({
       reader.readAsDataURL(file);
     },
   },  
-})
+});
 
+const router=new VueRouter({
+  mode: 'history',
+  routes: [
+    // TOPページ
+        { path: '/article', component: require('./components/Index.vue') },
+        // 記事投稿フォームページ
+        { path: '/article/create', component: require('./components/Create.vue') },
+  ]
+});
+
+const vue=new Vue({
+  router,
+  el: '#router'
+});
+
+//const reserve=new Vue({
+//  el: '#reserve',
+//  data: (){
+//    return{
+//      number:'',
+//      reserved_menu:[],
+//      calendar:'',
+//      message:'',
+//    }
+//  },
+//  methods:{
+//    reserve(){
+//      var reserve={
+//        'number':this.number,
+//        'reserved_menu':this.reserved_menu,
+//        'calendar':this.calendar,
+//        'message':this.message,
+//      };
+//      axios.post('/api/reserve/'+profile)
+//    }
+//  },
+//});
 
 $(function () {
   

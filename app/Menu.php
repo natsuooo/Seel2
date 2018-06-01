@@ -13,4 +13,12 @@ class Menu extends Model
   public function profile(){
     return $this->belongsTo('App\Profile');
   }
+  
+  public function reserves(){
+    return $this->hasMany('App\Reserve', 'reserved_menu');
+  }
+  
+  public function reserved_menus(){
+    return $this->hasMany('App\ReservedMenu');
+  }
 }

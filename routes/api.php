@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => 'api'],function(){
+    Route::post('/article/{id}',function($id){
+        $user = App\User::where('id',$id)->first();
+
+        $article = new App\Article();
+        $article->title = request('title');
+        $article->content = request('content');
+
+        $user->articles()->save($article);
+
+        return ['title' => request('title'),'content' => request('content')];
+    });
+
+});

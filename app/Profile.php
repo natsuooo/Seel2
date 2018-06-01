@@ -25,4 +25,8 @@ class Profile extends Model
   public function favorites(){
     return $this->belongsToMany('App\Favorite')->withTimestamps();
   }
+  
+  public function reserves(){
+    return $this->hasMany('App\Reserve', 'reserved_profile_id');
+  }
 }

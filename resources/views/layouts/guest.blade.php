@@ -35,6 +35,7 @@
                 </a>
                 <a href="{{ url('/home') }}">ホスト</a> | 
                 <a href="{{ url('/favorite') }}">お気に入り</a> | 
+                <a href="{{ url('/reserve') }}">予約</a> | 
                 <a href="{{ url('/notification') }}">通知</a> | 
                 <a href="{{ url('/message/receive') }}">メッセージ</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
