@@ -30,3 +30,13 @@ Google Tag Manager使ってみる
 ・全ての投稿ページをモーダルで、SPAに作り直す
 
 ・head要素を整理する
+
+・Vue routerでページ表示内容を切り替え、v-forで回し、vue+axiosで非同期にpostもgetも扱う。つまりlaravelはほとんどバックエンドに徹し、フロントはvueに全任せ。vueでアプリを作る感覚。次からはvueメインで作る。今回はもう作りこみすぎたのでjust laravelで作る
+
+・/js/bootstrap.js.map - No such file or directory
+
+・ページローディングの実装
+
+・一部コンテンツの遅延読み込み
+
+・api連携用にpassport入れちゃった

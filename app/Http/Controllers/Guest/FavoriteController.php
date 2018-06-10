@@ -41,4 +41,22 @@ class FavoriteController extends Controller
       return redirect()->back()->with('status', 'お気に入りから削除しました');
   }
   
+  public function vueFavorite(Request $request){
+    $isFav=Favorite::where('fav', $request->fav)->where('faved', $request->faved)->first();
+    
+    if(empty($isFav->id)){
+      $favorite=new Favorite();
+      $favorite->fav=$request->fav;
+      $favorite->faved=$request->faved;
+      $favorite->save();
+      $favorite->profiles()->attach($request->faved);
+      return redirect()->back()->with('status', 'お気に入りに追加しました');
+    }else{
+      Favorite::where('fav', $request->fav)->where('faved', $request->faved)->delete();
+      return redirect()->back()->with('status', 'お気に入りから削除しました');
+    }
+    
+  }
+  
 }
+

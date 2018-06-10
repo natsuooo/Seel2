@@ -10,13 +10,20 @@ use App\Menu;
 use App\Favorite;
 
 
-class TableController extends Controller
-{
-  public function show(Profile $profile){
-    $user=Auth::user();
-    $menus=Menu::where('profile_id', $profile->id)->latest('created_at')->get();
-    $faved=Favorite::where('faved', $profile->id)->count();
-    return view('/guest/table', compact('profile', 'menus', 'faved'));
+class TableController extends Controller{
+//  public function show(Profile $profile){
+//    $user=Auth::user();
+//    $menus=Menu::where('profile_id', $profile->id)->latest('created_at')->get();
+//    $faved=Favorite::where('faved', $profile->id)->count();
+//    return view('/guest/table', compact('profile', 'menus', 'faved'));
+//  }
+  
+  
+  public function vueTable(Profile $profile){
+    $id=$profile->id;
+    $profile=Profile::with('menus')->where('id', $profile->id)->latest('created_at')->get();
+    $faved=Favorite::where('faved', $id)->latest('created_at')->get();
+    return ['profile'=>$profile, 'faved'=>$faved];
   }
 }
 

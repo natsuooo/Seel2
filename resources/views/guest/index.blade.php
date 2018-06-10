@@ -16,26 +16,24 @@
   @endif
     <div class="col-md-8">
       <div class="card">
-          <div class="card-header">メニュー一覧</div>
-
-         
-          <div class="card-body">
-            @foreach($menus as $menu)
-            <div class="card-body" style="border-bottom:1px solid black;">
-              <div class="panel panel-default">
-                <img src="{{$menu->image}}" style="width:100px;">
-                <a href=""></a>
-                <p>タイトル：{{ $menu->title }}</p>
-                <p>説明：{{ $menu->body }}</p>
-                <p>価格：{{ $menu->price }}</p>
-                <p><a href="{{ url('/table', $menu->profile) }}">{{ $menu->profile->user_name }}</a></p>
-                <a href="{{ url('/table', $menu->profile) }}"><img src="{{$menu->profile->profile_image}}" style="width:100px;"></a>
-              </div>
-            </div>
-            @endforeach
+          <div class="card-header">メニュー一覧{{Auth::user()->id}}{{$user->id}}{{session('user')}}</div>
+          
+          
+          <div id="router">
+            <router-view></router-view>
           </div>
-          
-          
+         
+         <div id="app">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <passport-clients></passport-clients>
+                        <passport-authorized-clients></passport-authorized-clients>
+                        <passport-personal-access-tokens></passport-personal-access-tokens>
+                    </div>
+                </div>
+            </div>
+        </div>
           
       </div>
     </div>

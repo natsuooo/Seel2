@@ -8,12 +8,23 @@ use Illuminate\Support\Facades\Auth;
 use App\Menu;
 use App\Profile;
 
+
+
 class IndexController extends Controller
 {
+  
   public function index(){
-//    $user=Auth::user();
-//    $profile=Profile::where('user_id', $user->id)->first();
-    $menus=Menu::latest()->get();
-    return view('/guest/index', compact('profile', 'menus'));
+    $user=Auth::user();
+    $profile=Profile::where('user_id', $user->id)->first();
+//    $menus=Menu::latest()->get();
+    return view('/guest/index', compact('user', 'profile'));
   }
+  
+  public function vueIndex(){
+//    $menus=Menu::latest()->get();
+    $menus=Menu::with('profile')->latest()->get();
+    return ['menus'=>$menus];
+  }
+  
 }
+

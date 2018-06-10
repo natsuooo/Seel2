@@ -13,7 +13,6 @@
             </div>
           @endif
 					
-        	
          
           <div class="card-body">
             <h2>プロフィール</h2>
@@ -106,6 +105,10 @@
                   
                 </div>
                 {{Form::close()}}
+                
+                
+                
+                
               </div>
             </div>
           </div>

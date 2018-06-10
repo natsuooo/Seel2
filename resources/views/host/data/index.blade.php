@@ -8,7 +8,7 @@
           
            
             <div class="card">
-                <div class="card-header">{{ $user->name }}さんのデータ</div>
+                <div class="card-header">{{ $user->profile->user_name }}さんのデータ</div>
 							
                 @if (session('status'))
 									<div class="alert alert-success">

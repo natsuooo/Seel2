@@ -11,9 +11,10 @@
 |
 */
 
+
 //ゲストルーティング
 Route::get('/', 'Guest\IndexController@index');
-Route::get('/table/{profile}', 'Guest\TableController@show');
+//Route::get('/table/{profile}', 'Guest\TableController@show');
 Route::get('/favorite', 'Guest\FavoriteController@index');
 Route::get('/notification', 'NotificationController@index');
 Route::get('/message', 'MessageController@index');
@@ -29,11 +30,12 @@ Route::get('/message/send', 'MessageController@send');
 
 
 //お気に入り機能
-Route::post('/favorite/register', 'Guest\FavoriteController@registerOrDelete');
+//Route::post('/favorite/register', 'Guest\FavoriteController@registerOrDelete');
 Route::post('/favorite/delete', 'Guest\FavoriteController@delete');
 
 //予約
 Route::post('/reserve/{profile}', 'Guest\ReserveController@reserve');
+
 
 //認証
 Auth::routes();

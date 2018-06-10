@@ -1,17 +1,27 @@
 <!--resources/assets/js/components/Articles/Create.vue-->
 <template>
-    <div>
-        <div>
-            <h4>記事投稿</h4>
-            <div>
-                <input v-model="title" type="text" name="title" placeholder="タイトル">
-                <textarea v-model="content" class="form-control" rows="4" placeholder="コンテンツ"></textarea>
-                <p>{{ title }}</p>
-                <p>{{ content }}</p>
-                <button v-on:click="postArticle">投稿</button>
-            </div>
-        </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="number" class="col-form-label">ゲストの人数</label>
+      <input type="number" name="number" value="1" class="form-control" min="1">
     </div>
+    <div class="form-group" id="menu">
+      <p>予約したいメニューを選択して下さい。</p>
+      <?php 
+      foreach($menus as $menu){
+        echo '<div class="form-check">'.$menu->title.'（'.$menu->price.'円）</div>'
+      }
+      
+      ?>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+      <button type="submit" class="btn btn-primary">確認する</button>
+
+    </div>
+  </div>
+    
 </template>
 
 

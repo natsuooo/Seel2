@@ -1,3 +1,4 @@
+//jsファイルは分けない方が効率的な感じ。とりあえず分けないでいく。
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 /**
@@ -21,8 +22,28 @@ window.Vue = require('vue');
 
 Vue.component('profile-edit', require('./components/ProfileEdit.vue'));
 
-const app=new Vue({
-  el: '#app',
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+ 
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+ 
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+
+const app = new Vue({
+    el: '#app'
+});
+
+const imageUpload=new Vue({
+  el: '#imageUpload',
   data: {
     uploadedHeaderImage: '',
     uploadedProfileImage: '',
@@ -70,43 +91,32 @@ const app=new Vue({
   },  
 });
 
+
 const router=new VueRouter({
-  mode: 'history',
+//  mode: 'history',
+//  history ハッシュを消せる。リロード時の挙動が面倒
   routes: [
-    // TOPページ
-        { path: '/article', component: require('./components/Index.vue') },
-        // 記事投稿フォームページ
-        { path: '/article/create', component: require('./components/Create.vue') },
+//    { path: '/article', component: require('./components/Article.vue') },
+//    { path: '/article/create', component: require('./components/Create.vue') },
+//    { path: '/table/*', component: require('./components/Reserve.vue') },
+    { 
+      path: '/', 
+      component: require('./components/Index.vue'),
+    },
+    { 
+      path: '/table/:profile', 
+      name: 'table',
+      component: require('./components/Table.vue'),
+    },
+    
   ]
 });
 
-const vue=new Vue({
+const vueRouter=new Vue({
   router,
   el: '#router'
 });
 
-//const reserve=new Vue({
-//  el: '#reserve',
-//  data: (){
-//    return{
-//      number:'',
-//      reserved_menu:[],
-//      calendar:'',
-//      message:'',
-//    }
-//  },
-//  methods:{
-//    reserve(){
-//      var reserve={
-//        'number':this.number,
-//        'reserved_menu':this.reserved_menu,
-//        'calendar':this.calendar,
-//        'message':this.message,
-//      };
-//      axios.post('/api/reserve/'+profile)
-//    }
-//  },
-//});
 
 $(function () {
   
@@ -115,7 +125,7 @@ $(function () {
   $('[data-toggle="popover"]').popover();
   
   
-  //なぜか時間が選択したら消えてしまう。とりあえず放置。
+//  なぜか時間が選択したら消えてしまう。とりあえず放置。
   flatpickr('#calendar', {
     minDate: "today",
     enableTime: true,
@@ -127,3 +137,7 @@ $(function () {
   });
   
 });
+
+ 
+
+ 
