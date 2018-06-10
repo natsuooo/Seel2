@@ -16,7 +16,7 @@
   @endif
     <div class="col-md-8">
       <div class="card">
-          <div class="card-header">メニュー一覧{{Auth::user()->id}}{{$user->id}}{{session('user')}}</div>
+          <div class="card-header">メニュー一覧</div>
           
           
           <div id="router">
