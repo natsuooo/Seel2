@@ -164,7 +164,7 @@ return [
       
         Collective\Html\HtmlServiceProvider::class,
       
-        Laravel\Passport\PassportServiceProvider::class,
+//        Laravel\Passport\PassportServiceProvider::class,
 //      Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],

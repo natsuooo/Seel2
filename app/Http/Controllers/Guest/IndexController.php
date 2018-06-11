@@ -14,10 +14,10 @@ class IndexController extends Controller
 {
   
   public function index(){
-//    $user=Auth::user();
+    $user=Auth::user();
 //    $profile=Profile::where('user_id', $user->id)->first();
 //    $menus=Menu::latest()->get();
-    return view('/guest/index');
+    return view('/guest/index', compact('user'));
   }
   
   public function vueIndex(){

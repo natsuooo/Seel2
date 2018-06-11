@@ -13,7 +13,6 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-         \League\OAuth2\Server\Exception\OAuthServerException::class,
     ];
 
     /**
@@ -47,10 +46,6 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
-    }
-  protected function context()
-    {
-        return [];
     }
   
 }

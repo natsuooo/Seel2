@@ -39,6 +39,6 @@ Google Tag Manager使ってみる
 
 ・一部コンテンツの遅延読み込み
 
-・api連携用にpassport入れちゃった
+・api連携用にpassport入れちゃった、でも結局諦めた、SPA用にわざわざOAuth認証するとロード時間かかる&ムズイ、いつかAPI自作したいね
 
 ・/storage/*.keyを.gitignoreから削除しちゃった、セキュリティ怖いかも

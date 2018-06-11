@@ -23,7 +23,8 @@ class TableController extends Controller{
     $id=$profile->id;
     $profile=Profile::with('menus')->where('id', $profile->id)->latest('created_at')->get();
     $faved=Favorite::where('faved', $id)->latest('created_at')->get();
-    return ['profile'=>$profile, 'faved'=>$faved];
+    $user=Auth::user();
+    return ['profile'=>$profile, 'faved'=>$faved, 'user'=>$user];
   }
 }
 

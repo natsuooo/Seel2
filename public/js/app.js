@@ -52634,23 +52634,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getMenus();
+    //      this.getUser();
   },
   data: function data() {
     return {
-      menus: [],
-      user: []
+      menus: []
     };
   },
 
+  props: {
+    user: {
+      type: Object
+    }
+  },
+  //    computed: {
+  //      user_id: function(){
+  //        return JSON.parse(this.user);
+  //      }
+  //    },
   methods: {
     getMenus: function getMenus() {
       var _this = this;
 
       axios.get('/api').then(function (res) {
         _this.menus = res.data['menus'];
-        _this.user = res.data['user'];
         console.log(_this.menus);
-        console.log(_this.user);
       });
     }
   }
@@ -52675,7 +52683,9 @@ var render = function() {
           staticStyle: { "border-bottom": "1px solid black" }
         },
         [
-          _c("p", [_vm._v("タイトル：" + _vm._s(menu.title))]),
+          _c("p", [
+            _vm._v("タイトル：" + _vm._s(menu.title) + _vm._s(_vm.user.id))
+          ]),
           _vm._v(" "),
           _c("p", [
             _c("img", {
@@ -52864,16 +52874,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //        console.log('got a error');
     //        console.error(res);
     //      });
-    this.getUser();
+    //      this.getUser();
   },
   data: function data() {
     return {
       profile: [],
-      user: [],
       faved: []
     };
   },
 
+  props: {
+    user: {
+      type: Object
+    }
+  },
   methods: {
     getTable: function getTable() {
       var _this = this;
@@ -52884,15 +52898,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.faved = res.data['faved'];
         console.log(_this.profile);
         console.log(_this.faved);
-        console.log(_this.user);
-      });
-    },
-    getUser: function getUser() {
-      var _this2 = this;
-
-      axios.get("/api/user").then(function (res) {
-        console.log(res.data);
-        _this2.user = res.data;
       });
     }
   }

@@ -20,9 +20,10 @@
           
           
           <div id="router">
-            <router-view></router-view>
+            <router-view :user="{{ $user }}"></router-view>
           </div>
          
+<!--
          <div id="app">
             <div class="container">
                 <div class="row">
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </div>
+-->
           
       </div>
     </div>

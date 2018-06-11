@@ -74,13 +74,17 @@
 //        console.log('got a error');
 //        console.error(res);
 //      });
-      this.getUser();
+//      this.getUser();
     },
     data() {
       return {
         profile: [],
-        user: [],
         faved: [],
+      }
+    },
+    props: {
+      user:{
+        type: Object,
       }
     },
     methods: {
@@ -92,16 +96,15 @@
           this.faved = res.data['faved'];
           console.log(this.profile);
           console.log(this.faved);
-          console.log(this.user);
         })
       },
-      getUser(){
-        axios.get("/api/user")
-        .then(res => {
-          console.log(res.data);
-          this.user = res.data;
-        });
-      },
+//      getUser(){
+//        axios.get("/api/user")
+//        .then(res => {
+//          console.log(res.data);
+//          this.user = res.data;
+//        });
+//      },
     },
   };
 </script>
