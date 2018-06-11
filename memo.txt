@@ -40,3 +40,5 @@ Google Tag Manager使ってみる
 ・一部コンテンツの遅延読み込み
 
 ・api連携用にpassport入れちゃった
+
+・/storage/*.keyを.gitignoreから削除しちゃった、セキュリティ怖いかも
