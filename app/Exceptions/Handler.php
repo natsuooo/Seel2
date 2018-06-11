@@ -48,4 +48,8 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+  protected function context()
+    {
+        return [];
+    }
 }
